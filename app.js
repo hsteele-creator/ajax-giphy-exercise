@@ -5,6 +5,9 @@ const searchButton = document.querySelector("#btn");
 const apiKey = "SY2Jg0uEFlmGuUep0VURHlwIyiiBVUsn";
 const submitForm = document.querySelector("#search-form")
 const body = document.querySelector("body");
+const deleteButton = document.querySelector("#delete-btn");
+const images = document.querySelectorAll("img");
+const imageContainer = document.querySelector(".img-container");
 
 async function searchForGif(searchValue) {
    const result =  await axios.get(`http://api.giphy.com/v1/gifs/search?q=${searchValue}&api_key=${apiKey}`);
@@ -39,5 +42,11 @@ submitForm.addEventListener("submit", async function(e) {
     newImg.setAttribute("src", resultData.data.data[randomNumber].images.downsized.url);
     newImg.style.width="200px";
 
-    body.append(newImg);
+
+    imageContainer.append(newImg);
+    searchInput.value = "";
+})
+
+deleteButton.addEventListener("click", function() {
+    imageContainer.innerHTML = "";
 })
